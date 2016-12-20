@@ -10,7 +10,6 @@ RUN git fetch --tags || true
 
 # Install docker
 RUN apt-get update && apt-get install -y docker
-RUN which docker
 
 # Build development version
 ENV BUILD_PLATFORMS -osarch=linux/amd64

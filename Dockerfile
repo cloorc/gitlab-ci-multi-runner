@@ -12,6 +12,7 @@ RUN git fetch --tags || true
 ENV BUILD_PLATFORMS -osarch=linux/amd64
 RUN apt-get update && \
     apt-get install -y docker && \
+    dpkg-reconfigure -au && \
     make && \
     ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-ci-multi-runner && \
     ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-runner

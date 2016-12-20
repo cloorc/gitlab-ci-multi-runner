@@ -8,14 +8,11 @@ WORKDIR /go/src/gitlab.com/gitlab-org/gitlab-ci-multi-runner
 # Fetch tags (to have proper versioning)
 RUN git fetch --tags || true
 
-# Install docker
-RUN apt-get update && apt-get install -y docker
-
 # Build development version
 ENV BUILD_PLATFORMS -osarch=linux/amd64
 RUN make && \
-    ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-ci-multi-runner && \
-    ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-runner
+	ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-ci-multi-runner && \
+	ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-runner
 
 # Install runner
 RUN packaging/root/usr/share/gitlab-runner/post-install

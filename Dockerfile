@@ -10,9 +10,11 @@ RUN git fetch --tags || true
 
 # Build development version
 ENV BUILD_PLATFORMS -osarch=linux/amd64
-RUN make && \
-	ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-ci-multi-runner && \
-	ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-runner
+RUN apt-get update && \
+    apt-get install -y docker && \
+    make && \
+    ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-ci-multi-runner && \
+    ln -s $(pwd)/out/binaries/gitlab-ci-multi-runner-linux-amd64 /usr/bin/gitlab-runner
 
 # Install runner
 RUN packaging/root/usr/share/gitlab-runner/post-install
